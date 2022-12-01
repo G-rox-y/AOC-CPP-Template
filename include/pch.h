@@ -6,5 +6,8 @@
 #include <fmt/core.h>
 
 //define standard function prototypes from data.cpp
-int read(void* data);
-int write(std::string output);
+template<typename T>
+int read(T data);
+
+template<typename T>
+int write(T data);

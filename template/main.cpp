@@ -1,25 +1,19 @@
 #include "pch.h"
+#include "data.cpp"
 
-using namespace std;
-
-void part1(void* data){
-    //cast the pointer and do sth with the data
-}
-
-void part2(void* data){
-    //cast the pointer and do sth with the data
-}
 
 int main(){
+    using namespace std;
+    ios::sync_with_stdio(false); //c and c++ streams dont need to be sync
+    cin.tie(0); //untie cin from cout
+
     int data; //replace the "int" with the datatype you want to store data in
+
     //check if the process was succesful
-    if(read((void*) &data) == 1){
-        cin.get();
+    if(read(data) == 1)
         return 0;
-    }
     
-    part1((void*) data);
-    part2((void*) data);
+    // insert code here
     
     return 0;
 }

@@ -1,15 +1,13 @@
-//functions are declared in pch.h, so if you change inputs make sure to either
-//update pch.h or create the prototype within main (or make a header yourself)
 #include "pch.h"
 
-
 //parse function
-void parse(void* data, std::vector<std::string>* input){
+template <typename T>
+void parse(T data, std::vector<std::string>* input){
     using namespace std;
 
-    //cast the void* to the type you want to use
     for(int i = 0; i < input->size(); i++){
         //do something with the input and save it to the data
+        //don't forget that input is a pointer
     }
     
     return;
@@ -17,17 +15,20 @@ void parse(void* data, std::vector<std::string>* input){
 
 
 //read function
-int read(void* data){
-    std::ifstream fajl("input.txt", std::fstream::in);
+template<typename T>
+int read(T data){
+    std::ifstream fajl("input.txt");
     if (!fajl){
         fmt::print("Error opening input.txt: {}\n", strerror(errno));
         return 1;
     }
 
     std::vector<std::string> input;
-    int line = 0;
-    while(getline(fajl, input[line]))
-        line++;
+    std::string trsh;
+    while(getline(fajl, trsh)){
+        //here you can also do some work on the input strings
+        input.emplace_back(trsh);
+    }
 
     fajl.close();
 
@@ -37,14 +38,16 @@ int read(void* data){
 
 
 //write function
-int write(std::string output){
-    std::ofstream fajl("output.txt", std::fstream::out | std::fstream::trunc);
+template<typename T>
+int write(T data){
+    std::ofstream fajl("output.txt", std::fstream::trunc);
     if (!fajl){
         fmt::print("Error opening output.txt: {}\n", strerror(errno));
         return 1;
     }
 
-    fajl << output;
+    //insert the way you want the data to be outputed
+
     fajl.close();
     return 0;
 }
